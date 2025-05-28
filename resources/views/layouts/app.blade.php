@@ -43,6 +43,18 @@
             font-weight: 600;
             color: #3d4852;
         }
+        .nav-link.active {
+            color: #3490dc !important;
+            border-bottom: 2px solid #3490dc;
+        }
+        .nav-link {
+            padding-bottom: 0.4rem !important;
+            margin-bottom: 0.1rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-link:hover {
+            color: #3490dc !important;
+        }
     </style>
 </head>
 <body>
@@ -61,10 +73,14 @@
                     <ul class="navbar-nav me-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('wallet.dashboard') }}">{{ __('Dashboard') }}</a>
+                                <a class="nav-link {{ request()->routeIs('wallet.dashboard') ? 'active fw-bold' : '' }}" href="{{ route('wallet.dashboard') }}">
+                                    {{ __('Dashboard') }}
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('transactions.index') }}">{{ __('Transaction History') }}</a>
+                                <a class="nav-link {{ request()->routeIs('transactions.index') ? 'active fw-bold' : '' }}" href="{{ route('transactions.index') }}">
+                                    {{ __('Transaction History') }}
+                                </a>
                             </li>
                         @endauth
                     </ul>
@@ -75,13 +91,17 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link {{ request()->routeIs('login') ? 'active fw-bold' : '' }}" href="{{ route('login') }}">
+                                        {{ __('Login') }}
+                                    </a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link {{ request()->routeIs('register') ? 'active fw-bold' : '' }}" href="{{ route('register') }}">
+                                        {{ __('Register') }}
+                                    </a>
                                 </li>
                             @endif
                         @else
